@@ -54,7 +54,16 @@ namespace Microsoft.Toolkit.Uwp.SampleApp.SamplePages
             MicrosoftGraphService.Instance.Initialize(ClientId.Text);
 
             // Login via Azure Active Directory
-            if (!await MicrosoftGraphService.Instance.LoginAsync())
+            try
+            {
+                if (!await MicrosoftGraphService.Instance.LoginAsync())
+                {
+                    var error = new MessageDialog("Unable to sign in to Office 365");
+                    await error.ShowAsync();
+                    return;
+                }
+            }
+            catch
             {
                 var error = new MessageDialog("Unable to sign in to Office 365");
                 await error.ShowAsync();
