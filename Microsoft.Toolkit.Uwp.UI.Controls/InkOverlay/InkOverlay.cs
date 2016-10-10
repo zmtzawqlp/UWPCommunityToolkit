@@ -30,9 +30,22 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
         private DispatcherTimer _timer;
         private bool InkerActive;
 
+        public static readonly DependencyProperty InputScopeProperty =
+            DependencyProperty.RegisterAttached("InputScope", typeof(InkOverlayInputScope), typeof(InkOverlay), new PropertyMetadata(InkOverlayInputScope.Text));
+
         public InkOverlay()
         {
             DefaultStyleKey = typeof(InkOverlay);
+        }
+
+        public static void SetInputScope(UIElement element, InkOverlayInputScope value)
+        {
+            element.SetValue(InputScopeProperty, value);
+        }
+
+        public static InkOverlayInputScope GetInputScope(UIElement element)
+        {
+            return (InkOverlayInputScope)element.GetValue(InputScopeProperty);
         }
 
         protected override void OnApplyTemplate()
@@ -160,7 +173,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
                     if (box != null)
                     {
                         var text = result.GetTextCandidates().FirstOrDefault().Trim();
-                        if (box.InputScope != null && box.InputScope.Names.Contains(new InputScopeName(InputScopeNameValue.Digits)))
+                        if (GetInputScope(box) == InkOverlayInputScope.Digits)
                         {
                             text = convertToDigits(text);
                         }

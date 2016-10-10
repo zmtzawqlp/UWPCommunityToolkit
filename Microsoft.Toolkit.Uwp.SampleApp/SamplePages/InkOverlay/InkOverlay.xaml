@@ -12,7 +12,7 @@
         <controls:InkOverlay>
             <StackPanel Margin="30">
                 <TextBox Width="200" Margin="20"></TextBox>
-                <TextBox Width="200" Margin="20"></TextBox>
+                <TextBox Width="200" Margin="20" controls:InkOverlay.InputScope="Digits"></TextBox>
                 <TextBox Width="200" Margin="20"></TextBox>
                 <TextBox Width="200" Margin="20"></TextBox>
             </StackPanel>
