@@ -368,6 +368,9 @@
     </Compile>
     <Compile Include="SamplePages\Incremental Loading Collection\PeopleSource.cs" />
     <Compile Include="SamplePages\Incremental Loading Collection\Person.cs" />
+    <Compile Include="SamplePages\InkOverlay\InkOverlay.xaml.cs">
+      <DependentUpon>InkOverlay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SamplePages\LinkedIn Service\LinkedInPage.xaml.cs">
       <DependentUpon>LinkedInPage.xaml</DependentUpon>
     </Compile>
@@ -503,6 +506,10 @@
     <Page Include="SamplePages\Incremental Loading Collection\IncrementalLoadingCollectionPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SamplePages\InkOverlay\InkOverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SamplePages\LinkedIn Service\LinkedInPage.xaml">
       <SubType>Designer</SubType>
