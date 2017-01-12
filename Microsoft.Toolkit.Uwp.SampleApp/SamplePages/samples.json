@@ -257,6 +257,13 @@
         "CodeUrl": "https://github.com/Microsoft/UWPCommunityToolkit/tree/master/Microsoft.Toolkit.Uwp.UI.Animations",
         "XamlCodeFile": "ReorderGrid.bind",
         "Icon": "/SamplePages/ReorderGridAnimation/ReorderGrid.png"
+      },
+      {
+        "Name": "AnimationSet",
+        "Type": "AnimationSet",
+        "About": "AnimationSet animations",
+        "CodeUrl": "https://github.com/Microsoft/UWPCommunityToolkit/tree/master/Microsoft.Toolkit.Uwp.UI.Animations/Behaviors",
+        "Icon": "/SamplePages/FadeHeader/FadeHeaderBehavior.png"
       }
     ]
   },
