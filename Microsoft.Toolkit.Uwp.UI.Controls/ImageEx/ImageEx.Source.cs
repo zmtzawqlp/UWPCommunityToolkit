@@ -32,11 +32,9 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
         /// </summary>
         public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(nameof(Source), typeof(object), typeof(ImageEx), new PropertyMetadata(null, SourceChanged));
 
-        private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1);
-
         private Uri _uri;
         private bool _isHttpSource;
-        private bool _isLoadingImage;
+        private CancellationTokenSource _tokenSource = null;
 
         /// <summary>
         /// Gets or sets get or set the source used by the image
@@ -60,70 +58,71 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
 
         private async void SetSource(object source)
         {
-
-            if (_isInitialized)
+            if (!_isInitialized)
             {
-                _image.Source = null;
+                return;
+            }
 
-                if (source == null)
+            this._tokenSource?.Cancel();
+
+            this._tokenSource = new CancellationTokenSource();
+
+            _image.Source = null;
+
+            if (source == null)
+            {
+                VisualStateManager.GoToState(this, UnloadedState, true);
+                return;
+            }
+
+            VisualStateManager.GoToState(this, LoadingState, true);
+
+            var imageSource = source as ImageSource;
+            if (imageSource != null)
+            {
+                _image.Source = imageSource;
+                ImageExOpened?.Invoke(this, new ImageExOpenedEventArgs());
+                VisualStateManager.GoToState(this, LoadedState, true);
+                return;
+            }
+
+            _uri = source as Uri;
+            if (_uri == null)
+            {
+                var url = source as string ?? source.ToString();
+                if (!Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out _uri))
                 {
-                    VisualStateManager.GoToState(this, UnloadedState, true);
+                    VisualStateManager.GoToState(this, FailedState, true);
                     return;
-                }
-
-                VisualStateManager.GoToState(this, LoadingState, true);
-
-                var imageSource = source as ImageSource;
-                if (imageSource != null)
-                {
-                    _image.Source = imageSource;
-                    ImageExOpened?.Invoke(this, new ImageExOpenedEventArgs());
-                    VisualStateManager.GoToState(this, LoadedState, true);
-                    return;
-                }
-
-                _uri = source as Uri;
-                if (_uri == null)
-                {
-                    var url = source as string ?? source.ToString();
-                    if (!Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out _uri))
-                    {
-                        VisualStateManager.GoToState(this, FailedState, true);
-                        return;
-                    }
-                }
-
-                _isHttpSource = IsHttpUri(_uri);
-                if (!_isHttpSource && !_uri.IsAbsoluteUri)
-                {
-                    _uri = new Uri("ms-appx:///" + _uri.OriginalString.TrimStart('/'));
-                }
-
-                await _semaphore.WaitAsync();
-
-                try
-                {
-                    await LoadImageAsync();
-                }
-                finally
-                {
-                    _semaphore.Release();
                 }
             }
+
+            _isHttpSource = IsHttpUri(_uri);
+            if (!_isHttpSource && !_uri.IsAbsoluteUri)
+            {
+                _uri = new Uri("ms-appx:///" + _uri.OriginalString.TrimStart('/'));
+            }
+
+            await LoadImageAsync();
         }
 
         private async Task LoadImageAsync()
         {
-            if (!_isLoadingImage && _uri != null)
+            if (_uri != null)
             {
-                _isLoadingImage = true;
                 if (IsCacheEnabled && _isHttpSource)
                 {
                     try
                     {
-                        _image.Source = await ImageCache.Instance.GetFromCacheAsync(_uri, Path.GetFileName(_uri.ToString()), true);
+                        var img = await ImageCache.Instance.GetFromCacheAsync(_uri, true, _tokenSource.Token);
+
+                        _image.Source = img;
                         ImageExOpened?.Invoke(this, new ImageExOpenedEventArgs());
                         VisualStateManager.GoToState(this, LoadedState, true);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        // nothing to do as cancellation has been requested.
                     }
                     catch (Exception e)
                     {
@@ -135,8 +134,6 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
                 {
                     _image.Source = new BitmapImage(_uri);
                 }
-
-                _isLoadingImage = false;
             }
         }
     }

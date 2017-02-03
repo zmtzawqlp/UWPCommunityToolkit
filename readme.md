@@ -3,14 +3,12 @@ UWP Community Toolkit
 
 The UWP Community Toolkit is a collection of helper functions, custom controls, and app services. It simplifies and demonstrates common developer tasks building UWP apps for Windows 10.
 
-![Control Overview](githubresources/images/UWP-community-toolkit-overview.png "Sample Image")
-
 ## Build status
 
 | Target | Branch | Status | Recommended Nuget packages version |
 | ------ | ------ | ------ | ------ |
-| Production | master | [![Build status](https://ci.appveyor.com/api/projects/status/o1jjdpx3bsvi350n/branch/master?svg=true)](https://ci.appveyor.com/project/PedroLamas/uwpcommunitytoolkit/branch/master) | 1.1 |
-| Pre-release beta testing | dev | [![Build status](https://ci.appveyor.com/api/projects/status/o1jjdpx3bsvi350n/branch/dev?svg=true)](https://ci.appveyor.com/project/PedroLamas/uwpcommunitytoolkit/branch/dev) | Use our [pre-release Nuget repo](https://ci.appveyor.com/nuget/uwpcommunitytoolkit-dev) |
+| Production | master | [![Build status](https://ci.appveyor.com/api/projects/status/o60lv2tt1nbtklw8/branch/master?svg=true)](https://ci.appveyor.com/project/dotnetfoundation/uwpcommunitytoolkit/branch/master) | [![NuGet](https://img.shields.io/nuget/v/Microsoft.Toolkit.Uwp.svg)](https://www.nuget.org/packages/Microsoft.Toolkit.Uwp/) |
+| Pre-release beta testing | dev | [![Build status](https://ci.appveyor.com/api/projects/status/o60lv2tt1nbtklw8/branch/dev?svg=true)](https://ci.appveyor.com/project/dotnetfoundation/uwpcommunitytoolkit/branch/dev) | [![MyGet](https://img.shields.io/dotnet.myget/uwpcommunitytoolkit/vpre/Microsoft.Toolkit.Uwp.svg)](https://dotnet.myget.org/gallery/uwpcommunitytoolkit) |
 
 ## Getting started
 
@@ -43,39 +41,63 @@ Once you search you should see a list similar to the one below (versions may be 
 ### Animations
 
 * [Blur](http://docs.uwpcommunitytoolkit.com/en/master/animations/Blur/)
-* [Offset](http://docs.uwpcommunitytoolkit.com/en/master/animations/Offset/)
 * [Fade](http://docs.uwpcommunitytoolkit.com/en/master/animations/Fade/)
+* [FadeHeader](http://docs.uwpcommunitytoolkit.com/en/master/animations/FadeHeader/)
+* [Light](http://docs.uwpcommunitytoolkit.com/en/master/animations/Light/)
+* [Offset](http://docs.uwpcommunitytoolkit.com/en/master/animations/Offset/)
+* [ParallaxService](http://docs.uwpcommunitytoolkit.com/en/master/animations/ParallaxService/)
+* [ReorderGrid](http://docs.uwpcommunitytoolkit.com/en/master/animations/ReorderGrid/)
 * [Rotate](http://docs.uwpcommunitytoolkit.com/en/master/animations/Rotate/)
 * [Scale](http://docs.uwpcommunitytoolkit.com/en/master/animations/Scale/)
-* [FadeHeader](http://docs.uwpcommunitytoolkit.com/en/master/animations/FadeHeader/)
 
 ### Controls
 
 * [AdaptiveGridView](http://docs.uwpcommunitytoolkit.com/en/master/controls/AdaptiveGridView/)
-* [BladeControl](http://docs.uwpcommunitytoolkit.com/en/master/controls/BladeControl/)
+* [BladeView](http://docs.uwpcommunitytoolkit.com/en/master/controls/BladeView/)
 * [DropShadowPanel](http://docs.uwpcommunitytoolkit.com/en/master/controls/DropShadowPanel/)
+* [Expander](http://docs.uwpcommunitytoolkit.com/en/master/controls/Expander/)
 * [GridSplitter](http://docs.uwpcommunitytoolkit.com/en/master/controls/GridSplitter/)
 * [HamburgerMenu](http://docs.uwpcommunitytoolkit.com/en/master/controls/HamburgerMenu/)
 * [HeaderedTextBlock](http://docs.uwpcommunitytoolkit.com/en/master/controls/HeaderedTextBlock/)
 * [ImageEx](http://docs.uwpcommunitytoolkit.com/en/master/controls/ImageEx/)
+* [Loading](http://docs.uwpcommunitytoolkit.com/en/master/controls/Loading/)
+* [MarkdownTextBlock](http://docs.uwpcommunitytoolkit.com/en/master/controls/MarkdownTextBlock/)
+* [MasterDetailsView](http://docs.uwpcommunitytoolkit.com/en/master/controls/MasterDetailsView/)
 * [PullToRefreshListView](http://docs.uwpcommunitytoolkit.com/en/master/controls/PullToRefreshListview/)
 * [RadialGauge](http://docs.uwpcommunitytoolkit.com/en/master/controls/RadialGauge/)
 * [RangeSelector](http://docs.uwpcommunitytoolkit.com/en/master/controls/RangeSelector/)
 * [RotatorTile](http://docs.uwpcommunitytoolkit.com/en/master/controls/RotatorTile/)
+* [ScrollHeader](http://docs.uwpcommunitytoolkit.com/en/master/controls/ScrollHeader/)
 * [SlideableListItem](http://docs.uwpcommunitytoolkit.com/en/master/controls/SlidableListItem/)
+* [SurfaceDialTextboxHelper](http://docs.uwpcommunitytoolkit.com/en/master/controls/SurfaceDialTextboxHelper/)
+* [TextBoxMask](http://docs.uwpcommunitytoolkit.com/en/master/controls/TextBoxMask/)
+* [TextBoxRegex](http://docs.uwpcommunitytoolkit.com/en/master/controls/TextBoxRegex/)
+* [TileControl](http://docs.uwpcommunitytoolkit.com/en/master/controls/TileControl/)
+* [WrapPanel](http://docs.uwpcommunitytoolkit.com/en/master/controls/WrapPanel/)
 
 ### Code Helpers
 
+* [AdvancedCollectionView](docs.uwpcommunitytoolkit.com/en/master/helpers/AdvancedCollectionView/)
+* [BackgroundTaskHelper](http://docs.uwpcommunitytoolkit.com/en/master/helpers/BackgroundTaskHelper/)
+* [BindableValueHolder](http://docs.uwpcommunitytoolkit.com/en/master/helpers/BindableValueHolder/)
 * [Colors](http://docs.uwpcommunitytoolkit.com/en/master/helpers/Colors/)
-* [Connection](http://docs.uwpcommunitytoolkit.com/en/master/helpers/ConnectionHelper/)
+* [ConnectionHelper](http://docs.uwpcommunitytoolkit.com/en/master/helpers/ConnectionHelper/)
 * [Converters](http://docs.uwpcommunitytoolkit.com/en/master/helpers/Converters/)
+* [DeepLinkParsers](http://docs.uwpcommunitytoolkit.com/en/master/helpers/DeepLinkParsers/)
+* [DispatcherHelper](http://docs.uwpcommunitytoolkit.com/en/master/helpers/DispatcherHelper/)
+* [HttpHelper](http://docs.uwpcommunitytoolkit.com/en/master/helpers/HttpHelper/)
+* [HyperlinkExtensions](http://docs.uwpcommunitytoolkit.com/en/master/helpers/HyperlinkExtensions/)
 * [ImageCache](http://docs.uwpcommunitytoolkit.com/en/master/helpers/ImageCache/)
 * [Incremental Loading Collection](http://docs.uwpcommunitytoolkit.com/en/master/helpers/IncrementalLoadingCollection/)
+* [ListViewBaseExtensions](http://docs.uwpcommunitytoolkit.com/en/master/helpers/ListViewBaseExtensions/)
 * [Object Storage](http://docs.uwpcommunitytoolkit.com/en/master/helpers/ObjectStorage/)
+* [PrinterHelper](http://docs.uwpcommunitytoolkit.com/en/master/helpers/PrinterHelper/)
 * [StorageFiles](http://docs.uwpcommunitytoolkit.com/en/master/helpers/StorageFiles/)
 * [Streams](http://docs.uwpcommunitytoolkit.com/en/master/helpers/Streams/)
+* [SystemInformation](http://docs.uwpcommunitytoolkit.com/en/master/helpers/SystemInformation/)
 * [VisualTreeExtensions](http://docs.uwpcommunitytoolkit.com/en/master/helpers/VisualTreeExtensions/)
 * [WeakEventListener](http://docs.uwpcommunitytoolkit.com/en/master/helpers/WeakEventListener/)
+* [WebViewExtensions](http://docs.uwpcommunitytoolkit.com/en/master/helpers/WebViewExtensions/)
 
 ### Services
 
@@ -83,6 +105,8 @@ Once you search you should see a list similar to the one below (versions may be 
 * [Facebook](http://docs.uwpcommunitytoolkit.com/en/master/services/Facebook/)
 * [LinkedIn](http://docs.uwpcommunitytoolkit.com/en/master/services/Linkedin/)
 * [Microsoft Graph](http://docs.uwpcommunitytoolkit.com/en/master/services/MicrosoftGraph/)
+* [Microsoft Translator Service](http://docs.uwpcommunitytoolkit.com/en/master/services/MicrosoftTranslator/)
+* [OneDrive](http://docs.uwpcommunitytoolkit.com/en/master/services/OneDrive/)
 * [Twitter](http://docs.uwpcommunitytoolkit.com/en/master/services/Twitter/)
 
 ### Notifications
@@ -91,9 +115,8 @@ Once you search you should see a list similar to the one below (versions may be 
 
 ## Feedback and Requests
 
-Please use [GitHub issues](https://github.com/Microsoft/UWPCommunityToolkit/issues) for questions or comments.
-
-If you have specific feature requests or would like to vote on what others are recommending visit our [UWP Community Toolkit User Voice](https://aka.ms/uwpcommunitytoolkituservoice).
+Please use [GitHub issues](https://github.com/Microsoft/UWPCommunityToolkit/issues) for questions and comments.
+For feature requests, please create en entry in our [Uservoice](https://wpdev.uservoice.com/forums/110705-universal-windows-platform/category/193402-uwp-community-toolkit).
 
 ## Contributing
 Do you want to contribute? Here are our [contribution guidelines](https://github.com/Microsoft/UWPCommunityToolkit/blob/master/contributing.md).
@@ -110,9 +133,9 @@ For more information see the [.NET Foundation Code of Conduct](http://www.dotnet
 
 ## Roadmap
 
-Read what we [plan for next iteration](https://github.com/Microsoft/UWPCommunityToolkit/issues?q=is%3Aopen+is%3Aissue+milestone%3Av1.2), and feel free to ask questions.
+Read what we [plan for next iteration](https://github.com/Microsoft/UWPCommunityToolkit/issues?q=is%3Aopen+is%3Aissue+milestone%3Av1.4), and feel free to ask questions.
 
-By adding this [Nuget repo](https://ci.appveyor.com/nuget/uwpcommunitytoolkit-dev) to your Visual Studio, you can also get pre-release packages of upcoming version (updated on every pull request).
+By adding this ([Nuget repo](https://dotnet.myget.org/F/uwpcommunitytoolkit/api/v3/index.json) | [Gallery](https://dotnet.myget.org/gallery/uwpcommunitytoolkit)) to your Visual Studio, you can also get pre-release packages of upcoming version.
 
 ## .NET Foundation
 

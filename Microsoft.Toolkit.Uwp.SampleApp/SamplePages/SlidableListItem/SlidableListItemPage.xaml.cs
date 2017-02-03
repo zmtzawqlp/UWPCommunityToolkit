@@ -27,7 +27,7 @@ namespace Microsoft.Toolkit.Uwp.SampleApp.SamplePages
 
         public SlidableListItemPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             ObservableCollection<Item> items = new ObservableCollection<Item>();
 
             for (var i = 0; i < 1000; i++)
@@ -36,18 +36,6 @@ namespace Microsoft.Toolkit.Uwp.SampleApp.SamplePages
             }
 
             _items = items;
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            var propertyDesc = e.Parameter as PropertyDescriptor;
-
-            if (propertyDesc != null)
-            {
-                DataContext = propertyDesc.Expando;
-            }
         }
 
         private bool CanExecuteDeleteItemCommand(Item item)

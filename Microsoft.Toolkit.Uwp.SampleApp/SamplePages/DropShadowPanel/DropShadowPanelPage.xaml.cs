@@ -28,7 +28,7 @@ namespace Microsoft.Toolkit.Uwp.SampleApp.SamplePages
         /// </summary>
         public DropShadowPanelPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>
@@ -38,13 +38,6 @@ namespace Microsoft.Toolkit.Uwp.SampleApp.SamplePages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
-            var propertyDesc = e.Parameter as PropertyDescriptor;
-
-            if (propertyDesc != null)
-            {
-                DataContext = propertyDesc.Expando;
-            }
 
             if (!DropShadowPanel.IsSupported)
             {

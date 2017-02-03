@@ -11,7 +11,6 @@
 // ******************************************************************
 
 using System;
-using System.Diagnostics;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -41,7 +40,6 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
 
         private Image _image;
         private ProgressRing _progress;
-
         private bool _isInitialized;
 
         /// <summary>
@@ -50,7 +48,6 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
         public ImageEx()
         {
             DefaultStyleKey = typeof(ImageEx);
-            Loaded += OnLoaded;
         }
 
         /// <summary>
@@ -105,19 +102,6 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
             ImageFailed?.Invoke(this, e);
             ImageExFailed?.Invoke(this, new ImageExFailedEventArgs(new Exception(e.ErrorMessage)));
             VisualStateManager.GoToState(this, FailedState, true);
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            if (_image != null && _image.Source == null)
-            {
-                RefreshImage();
-            }
-        }
-
-        private async void RefreshImage()
-        {
-            await LoadImageAsync();
         }
     }
 }
