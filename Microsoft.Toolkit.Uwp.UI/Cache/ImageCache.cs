@@ -13,6 +13,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
@@ -30,6 +31,7 @@ namespace Microsoft.Toolkit.Uwp.UI
         /// <summary>
         /// Private singleton field.
         /// </summary>
+        [ThreadStatic]
         private static ImageCache _instance;
 
         private List<string> _extendedPropertyNames = new List<string>();
@@ -52,16 +54,36 @@ namespace Microsoft.Toolkit.Uwp.UI
         /// Cache specific hooks to process items from HTTP response
         /// </summary>
         /// <param name="stream">input stream</param>
+        /// <param name="initializerKeyValues">key value pairs used when initializing instance of generic type</param>
         /// <returns>awaitable task</returns>
-        protected override async Task<BitmapImage> InitializeTypeAsync(IRandomAccessStream stream)
+        protected override async Task<BitmapImage> InitializeTypeAsync(Stream stream, List<KeyValuePair<string, object>> initializerKeyValues = null)
         {
-            if (stream.Size == 0)
+            if (stream.Length == 0)
             {
                 throw new FileNotFoundException();
             }
 
             BitmapImage image = new BitmapImage();
-            await image.SetSourceAsync(stream).AsTask().ConfigureAwait(false);
+
+            if (initializerKeyValues != null && initializerKeyValues.Count > 0)
+            {
+                foreach (var kvp in initializerKeyValues)
+                {
+                    if (string.IsNullOrWhiteSpace(kvp.Key))
+                    {
+                        continue;
+                    }
+
+                    var propInfo = image.GetType().GetProperty(kvp.Key, BindingFlags.Public | BindingFlags.Instance);
+
+                    if (propInfo != null && propInfo.CanWrite)
+                    {
+                        propInfo.SetValue(image, kvp.Value);
+                    }
+                }
+            }
+
+            await image.SetSourceAsync(stream.AsRandomAccessStream()).AsTask().ConfigureAwait(false);
 
             return image;
         }
@@ -70,12 +92,13 @@ namespace Microsoft.Toolkit.Uwp.UI
         /// Cache specific hooks to process items from HTTP response
         /// </summary>
         /// <param name="baseFile">storage file</param>
+        /// <param name="initializerKeyValues">key value pairs used when initializing instance of generic type</param>
         /// <returns>awaitable task</returns>
-        protected override async Task<BitmapImage> InitializeTypeAsync(StorageFile baseFile)
+        protected override async Task<BitmapImage> InitializeTypeAsync(StorageFile baseFile, List<KeyValuePair<string, object>> initializerKeyValues = null)
         {
-            using (var stream = await baseFile.OpenReadAsync().AsTask().ConfigureAwait(MaintainContext))
+            using (var stream = await baseFile.OpenStreamForReadAsync().ConfigureAwait(MaintainContext))
             {
-                return await InitializeTypeAsync(stream).ConfigureAwait(false);
+                return await InitializeTypeAsync(stream, initializerKeyValues).ConfigureAwait(MaintainContext);
             }
         }
 

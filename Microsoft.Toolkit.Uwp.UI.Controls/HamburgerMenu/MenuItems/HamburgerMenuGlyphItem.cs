@@ -10,13 +10,15 @@
 // THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
 // ******************************************************************
 
+using System;
 using Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Uwp.UI.Controls
 {
     /// <summary>
-    /// The HamburgerMenuItem provides a glyph based implementation for HamburgerMenu entries.
+    /// The HamburgerMenuGlyphItem provides a glyph based implementation for HamburgerMenu entries.
     /// </summary>
+    [Obsolete("The HamburgerMenuGlyphItem will be removed alongside the HamburgerMenu in a future major release. Please use the NavigationView control available in the Fall Creators Update")]
     public class HamburgerMenuGlyphItem : HamburgerMenuItem
     {
         /// <summary>
@@ -25,7 +27,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(nameof(Glyph), typeof(string), typeof(HamburgerMenuItem), new PropertyMetadata(null));
 
         /// <summary>
-        /// Gets or sets gets of sets a value that specifies the glyph to use from Segoe MDL2 Assets font.
+        /// Gets or sets a value that specifies the glyph to use from Segoe MDL2 Assets font.
         /// </summary>
         public string Glyph
         {
